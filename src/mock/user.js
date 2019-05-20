@@ -30,5 +30,15 @@ for (let i = 0; i < 10; i++) { // 可自定义生成的个数
   data.push(template)
 }
 
+const LoginUsers = [{
+  id: 1,
+  username: 'admin',
+  password: 'admin123',
+  avatar: 'https://apic.douyucdn.cn/upload/avatar_v3/201905/7a9c267dcb424067b803974f87b19cee_middle.jpg',
+  name: '夏花花'
+}];
 
-Mock.mock('/data/index', 'get', data) // 根据数据模板生成模拟数据
+export {
+  LoginUsers,
+  data
+}

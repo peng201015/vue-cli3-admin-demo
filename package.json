@@ -10,8 +10,10 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
+        "axios-mock-adapter": "^1.16.0",
         "core-js": "^2.6.5",
         "element-ui": "^2.4.11",
+        "file-loader": "^3.0.1",
         "mockjs": "^1.0.1-beta3",
         "qs": "^6.6.0",
         "vue": "^2.6.6",
