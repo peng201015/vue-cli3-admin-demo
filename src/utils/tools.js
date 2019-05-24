@@ -1,6 +1,6 @@
 export default {
   // 检查是否是密码
-  passwordRegx: function(str) {
+  passwordRegx: function (str) {
     var patrn = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,100}$/;
     return patrn.test(str);
   },
@@ -8,7 +8,7 @@ export default {
   /**
    * 检查是否是邮箱
    */
-  isEmail: function(str) {
+  isEmail: function (str) {
     var patrn = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
     return patrn.test(str);
   },
@@ -16,7 +16,7 @@ export default {
   /**
    * 检查是否是手机号码
    */
-  isPhone: function(str) {
+  isPhone: function (str) {
     var patrn = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
     return patrn.test(str);
   },
@@ -24,7 +24,7 @@ export default {
   /**
    * 快速生成A-Z
    */
-  getENLetter: function() {
+  getENLetter: function () {
     var arr = [];
     for (var i = 65; i < 91; i++) {
       arr.push(String.fromCharCode(i));
@@ -35,7 +35,7 @@ export default {
   /**
    * 价格小数位少于两位默认保留两位小数 多于两位小数的默认保留原小数位
    */
-  conversionFilter: function(value) {
+  conversionFilter: function (value) {
     if (value == "") return "0.00";
     var x = String(value).indexOf(".") + 1;
     if (x == 0)
@@ -51,7 +51,7 @@ export default {
    */
   CookieUtil: {
     // 设置cookie
-    set: function(name, value, expires, domain, path, secure) {
+    set: function (name, value, expires, domain, path, secure) {
       var cookieText = "";
       cookieText += encodeURIComponent(name) + "=" + encodeURIComponent(value);
       if (expires instanceof Date) {
@@ -70,7 +70,7 @@ export default {
     },
     // name=value; expires=expiration_time; path=domain_path; domain=domain_name; secure
     // 获取cookie
-    get: function(name) {
+    get: function (name) {
       var cookieName = encodeURIComponent(name) + "=",
         cookieStart = document.cookie.indexOf(cookieName),
         cookieValue = "";
@@ -84,7 +84,7 @@ export default {
       return cookieValue;
     },
     // 删除cookie
-    remove: function(name, domain, path, secure) {
+    remove: function (name, domain, path, secure) {
       this.set(name, "", Date(0), domain, path, secure);
     }
   },
@@ -96,7 +96,7 @@ export default {
     /**
      * 说明：javascript的加法结果会有误差，在两个浮点数相加的时候会比较明显。这个函数返回较为精确的加法结果。
      **/
-    accAdd: function(arg1, arg2) {
+    accAdd: function (arg1, arg2) {
       var r1, r2, m, c;
       try {
         r1 = arg1.toString().split(".")[1].length;
@@ -128,7 +128,7 @@ export default {
     /**
      * 减法函数
      **/
-    accSub: function(arg1, arg2) {
+    accSub: function (arg1, arg2) {
       var r1, r2, m, n;
       try {
         r1 = arg1.toString().split(".")[1].length;
@@ -147,7 +147,7 @@ export default {
     /**
      * 乘法法函数
      **/
-    accMul: function(arg1, arg2) {
+    accMul: function (arg1, arg2) {
       var m = 0,
         s1 = arg1.toString(),
         s2 = arg2.toString();
@@ -162,7 +162,7 @@ export default {
     /**
      * 除法法函数
      **/
-    accDiv: function(arg1, arg2) {
+    accDiv: function (arg1, arg2) {
       var t1 = 0,
         t2 = 0,
         r1, r2;
@@ -182,7 +182,7 @@ export default {
    * 时间戳转换
    * @param {时间戳} inputTime 
    */
-  formatDateTime: function(inputTime) {
+  formatDateTime: function (inputTime) {
     var date = new Date(inputTime);
     var y = date.getFullYear();
     var m = date.getMonth() + 1;
@@ -196,5 +196,28 @@ export default {
     minute = minute < 10 ? '0' + minute : minute;
     second = second < 10 ? '0' + second : second;
     return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+  },
+  /**
+   * 防抖
+   */
+  debounce: {
+    timeout: null,
+    handler: function (fn, wait) {
+      if (this.timeout !== null) clearTimeout(this.timeout)
+      this.timeout = setTimeout(fn, wait);
+    }
+  },
+  /**
+   * 节流
+   */
+  throttle: function (fn, delay) {
+    var prev = Date.now()
+    return function () {
+      var now = Date.now()
+      if (now - prev > delay) {
+        fn()
+        prev = Date.now()
+      }
+    }
   }
 }

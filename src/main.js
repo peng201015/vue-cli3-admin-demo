@@ -7,7 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import api from './api/index.js'
 
 // 引入mock.js
-import Mock from './mock';
+import Mock from './mock/index';
 Mock.init()
 
 Vue.config.productionTip = false
