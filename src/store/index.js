@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import tagsView from './tagsView/tagsView'
-
 Vue.use(Vuex)
 
+import tagsView from './tagsView/tagsView'
+import permission from './permission/index'
+
+
 export default new Vuex.Store({
-    state: {},
-    mutations: {},
-    actions: {},
     modules: {
-        tagsView: tagsView
+        tagsView,
+        permission
     }
 })
