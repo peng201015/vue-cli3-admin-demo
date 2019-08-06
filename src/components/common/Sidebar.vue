@@ -5,6 +5,7 @@
       @open="handleOpen"
       @close="handleClose"
       :collapse="isCollapse"
+      :default-active="$route.path" 
       background-color="rgb(50, 65, 87)"
       text-color="rgb(191, 203, 217)"
       active-text-color="#409eff"
@@ -12,20 +13,20 @@
     >
       <template v-for="(item,i) in permission_routers">
         <!-- 表示有子菜单的情况 -->
-        <el-submenu v-if="item.children  && item.children.length >= 1" :key="i" :index="item.name">
+        <el-submenu v-if="item.children  && item.children.length >= 1" :key="i" :index="item.path">
           <template slot="title">
             <i :class="item.meta.icon"></i>
             <span slot="title">{{item.meta.title}}</span>
           </template>
           <router-link v-for="(child,idx) in item.children" :key="idx" :to="{path:`${item.path}/${child.path}`}">
-            <el-menu-item
-            >{{child.meta.title}}</el-menu-item>
+            <el-menu-item :index="`${item.path}/${child.path}`"
+            ><span slot="title">{{child.meta.title}}</span></el-menu-item>
           </router-link>
         </el-submenu>
 
         <!-- 表示只有一级目录的情况 -->
         <router-link v-else :to="{path:`${item.path}`}" :key="i">
-            <el-menu-item :index="item.name">
+            <el-menu-item :index="`${item.path}`">
               <i :class="item.meta.icon"></i>
               <span slot="title">{{item.meta.title}}</span>
             </el-menu-item>
@@ -48,7 +49,7 @@ export default {
     EventBus.$on("changeCollapse", () => {
       this.isCollapse = !this.isCollapse;
     });
-    console.log(this.permission_routers)
+    console.log(this.permission_routers,this.$route.path)
   },
   computed:{
     ...mapGetters([

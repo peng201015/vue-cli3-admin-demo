@@ -97,8 +97,6 @@ export default {
     color: #ffffff;
     text-align: left;
     line-height: 70px;
-    width: 80%;
-    height: 100%;
     float: left;
     font-size: 22px;
     .el-button {
